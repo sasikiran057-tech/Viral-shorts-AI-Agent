@@ -1,0 +1,35 @@
+# Android Keystore
+android-keystore.jks
+
+# Gradle files
+.gradle
+.gradle/
+build/
+
+# Android Studio
+.idea/
+.idea
+*.iml
+*.iws
+*.ipr
+
+# Local properties
+local.properties
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Lint
+lint.xml
+lint-results.xml
+lint-results-debug.html
+
+# Firebase
+google-services.json

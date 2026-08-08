@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Viral Shorts AI</string>
+    
+    <!-- Authentication -->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Full Name</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? Sign up</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    
+    <!-- Home -->
+    <string name="home">Home</string>
+    <string name="trends">Trends</string>
+    <string name="create">Create</string>
+    <string name="analytics">Analytics</string>
+    <string name="profile">Profile</string>
+    
+    <!-- Trends -->
+    <string name="discover_trends">Discover Trends</string>
+    <string name="viral_score">Viral Score</string>
+    <string name="views">Views</string>
+    <string name="engagement">Engagement</string>
+    <string name="trending_now">Trending Now</string>
+    
+    <!-- Script Generation -->
+    <string name="generate_script">Generate Script</string>
+    <string name="topic">Topic</string>
+    <string name="duration">Duration (seconds)</string>
+    <string name="style">Style</string>
+    <string name="hook">Hook</string>
+    <string name="main_content">Main Content</string>
+    <string name="call_to_action">Call to Action</string>
+    
+    <!-- Video -->
+    <string name="create_video">Create Video</string>
+    <string name="edit_video">Edit Video</string>
+    <string name="preview">Preview</string>
+    <string name="publish">Publish</string>
+    <string name="select_assets">Select Assets</string>
+    <string name="add_voiceover">Add Voiceover</string>
+    <string name="add_subtitles">Add Subtitles</string>
+    <string name="processing">Processing...</string>
+    <string name="processing_video">Processing Video</string>
+    
+    <!-- Publishing -->
+    <string name="publish_to">Publish to</string>
+    <string name="youtube">YouTube</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="schedule">Schedule</string>
+    <string name="now">Now</string>
+    <string name="later">Later</string>
+    
+    <!-- Analytics -->
+    <string name="total_views">Total Views</string>
+    <string name="total_likes">Total Likes</string>
+    <string name="total_comments">Total Comments</string>
+    <string name="avg_engagement">Average Engagement</string>
+    <string name="performance">Performance</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="confirm">Confirm</string>
+    <string name="logout">Logout</string>
+</resources>
