@@ -1,412 +1,290 @@
 # Viral Shorts AI Agent
 
-A production-ready AI agent that discovers trending topics, generates viral short-form video ideas, creates scripts, produces videos, and publishes to YouTube Shorts, Instagram Reels, and Facebook Reels.
+🚀 **AI-Powered Viral Shorts Generator** for YouTube, Instagram, and Facebook
 
-## Table of Contents
-
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [API Keys Setup](#api-keys-setup)
-- [Development](#development)
-- [Deployment](#deployment)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
-- [License](#license)
+Automatic viral content creation using AI - from trend discovery to multi-platform publishing.
 
 ## Features
 
-### 🎯 Core Features
+✨ **AI-Powered Content**
+- Trend discovery and analysis
+- AI script generation using GPT-4
+- Automatic video editing and assembly
+- High-quality voiceovers with ElevenLabs
+- SEO optimization for maximum reach
 
-- **Viral Trend Discovery**: Real-time trend analysis using multiple data sources
-- **AI Script Generation**: Creates engaging 15-60 second scripts with hooks and CTAs
-- **Video Generation**: Creates original videos from text, images, and stock media
-- **Multi-Platform Publishing**: YouTube Shorts, Instagram Reels, Facebook Reels
-- **Analytics Dashboard**: Track video performance across platforms
-- **AI Agent Architecture**: Modular agents for trend research, script writing, video creation
-- **Background Job Processing**: Handles long-running tasks asynchronously
-- **Low-RAM Optimization**: Works on 4GB RAM machines
-- **Security First**: JWT auth, OAuth, encrypted credentials, rate limiting
+🎬 **Video Generation**
+- 30-60 second short-form video creation
+- 9:16 vertical aspect ratio (mobile optimized)
+- 1080x1920 resolution
+- Professional transitions and effects
+- Auto-generated subtitles
+- Custom watermarks
 
-### 📊 Dashboard Features
+📱 **Multi-Platform Publishing**
+- YouTube Shorts
+- Instagram Reels
+- Facebook Reels
+- Scheduled posting
+- Cross-platform analytics
 
-- Viral score for each idea
-- Content generation history
-- Video processing status
-- Real-time analytics
-- Scheduled posts management
-- Published videos tracking
+📊 **Analytics & Intelligence**
+- Real-time performance tracking
+- Viral score prediction
+- Audience demographics
+- Platform-specific insights
+- Historical trend analysis
 
 ## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ and npm
-- PostgreSQL 12+ or MongoDB 4.4+
+- Node.js 18+
+- PostgreSQL 12+
+- Redis 6+
 - FFmpeg 4.2+
-- Git
 
 ### Installation
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/yourusername/viral-shorts-ai-agent.git
 cd viral-shorts-ai-agent
 
 # Install dependencies
 npm install
 
-# Copy environment template
+# Setup environment variables
 cp .env.example .env
 
-# Configure your API keys (see Configuration section)
-# Edit .env with your credentials
-
-# Setup database
+# Configure database
 npm run db:setup
 
-# Start development server
-npm run dev
+# Start development
+npm run dev:backend    # Terminal 1
+npm run dev:frontend   # Terminal 2 (in frontend/)
 ```
 
-The application will be available at:
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:3000
+### Access Application
 
-## Project Structure
-
-```
-viral-shorts-ai-agent/
-├── frontend/                 # React Vite application
-│   ├── src/
-│   │   ├── pages/           # Dashboard, Trending, Create, etc.
-│   │   ├── components/      # Reusable UI components
-│   │   ├── services/        # API client services
-│   │   ├── hooks/           # Custom React hooks
-│   │   ├── store/           # State management (Zustand/Redux)
-│   │   ├── utils/           # Helper functions
-│   │   ├── styles/          # Tailwind CSS
-│   │   └── App.jsx
-│   ├── package.json
-│   └── vite.config.js
-├── backend/                  # Node.js Express server
-│   ├── src/
-│   │   ├── routes/          # API endpoints
-│   │   ├── controllers/     # Request handlers
-│   │   ├── middleware/      # Auth, logging, validation
-│   │   ├── models/          # Database schemas
-│   │   ├── config/          # Configuration files
-│   │   ├── utils/           # Utility functions
-│   │   └── server.js
-│   ├── package.json
-│   └── .env.example
-├── agents/                   # AI Agent modules
-│   ├── TrendResearchAgent.js
-│   ├── TrendAnalyzerAgent.js
-│   ├── ScriptWriterAgent.js
-│   ├── VideoPlannerAgent.js
-│   ├── AssetGeneratorAgent.js
-│   ├── VoiceoverAgent.js
-│   ├── VideoEditorAgent.js
-│   ├── SEOAgent.js
-│   ├── PublishingAgent.js
-│   └── AnalyticsAgent.js
-├── services/                 # External service integrations
-│   ├── youtube/
-│   ├── instagram/
-│   ├── facebook/
-│   ├── openai/
-│   ├── elevenLabs/
-│   └── firebase/
-├── workers/                  # Background job processors
-│   ├── videoProcessor.js
-│   ├── scriptGenerator.js
-│   ├── assetGenerator.js
-│   └── publisher.js
-├── database/                 # Database migrations and seeds
-│   ├── migrations/
-│   ├── seeds/
-│   └── schema.sql
-├── uploads/                  # User uploads (gitignored)
-├── videos/                   # Generated videos (gitignored)
-├── config/                   # Configuration files
-│   ├── database.js
-│   ├── jwt.js
-│   ├── redis.js
-│   └── logger.js
-├── tests/                    # Test files
-│   ├── unit/
-│   ├── integration/
-│   └── e2e/
-├── docs/                     # Documentation
-│   ├── API.md
-│   ├── AGENTS.md
-│   ├── SETUP.md
-│   └── DATABASE.md
-├── docker-compose.yml        # Docker configuration
-├── Dockerfile               # Container image
-├── package.json             # Root package.json
-├── .env.example             # Environment variables template
-└── README.md                # This file
-```
-
-## Installation
-
-### Step 1: Clone and Install
-
-```bash
-git clone https://github.com/yourusername/viral-shorts-ai-agent.git
-cd viral-shorts-ai-agent
-npm install
-```
-
-### Step 2: Install FFmpeg
-
-**macOS:**
-```bash
-brew install ffmpeg
-```
-
-**Ubuntu/Debian:**
-```bash
-sudo apt-get install ffmpeg
-```
-
-**Windows:**
-Download from https://ffmpeg.org/download.html
-
-### Step 3: Setup Database
-
-**PostgreSQL:**
-```bash
-createpg viral_shorts_db
-npm run db:migrate
-npm run db:seed
-```
-
-**MongoDB:**
-```bash
-# MongoDB runs automatically via docker-compose
-npm run db:setup:mongo
-```
-
-## Configuration
-
-### Environment Variables
-
-Copy `.env.example` to `.env` and fill in your credentials:
-
-```bash
-cp .env.example .env
-```
-
-### Core Configuration
-
-```env
-# Server
-NODE_ENV=development
-PORT=3000
-FRONTEND_URL=http://localhost:5173
-
-# Database
-DATABASE_URL=postgresql://user:password@localhost:5432/viral_shorts_db
-# OR for MongoDB:
-# DATABASE_URL=mongodb://localhost:27017/viral_shorts_db
-
-# JWT
-JWT_SECRET=your-super-secret-jwt-key-min-32-chars
-JWT_EXPIRY=7d
-
-# Redis (for job queue)
-REDIS_URL=redis://localhost:6379
-
-# Logging
-LOG_LEVEL=debug
-LOG_DIR=./logs
-```
-
-## API Keys Setup
-
-### OpenAI (Required for Script Generation)
-
-1. Go to https://platform.openai.com/account/api-keys
-2. Create a new API key
-3. Add to `.env`:
-```env
-OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-4-turbo-preview
-```
-
-### YouTube Data API (For Publishing)
-
-1. Go to https://console.developers.google.com/
-2. Create a new project
-3. Enable YouTube Data API v3
-4. Create OAuth 2.0 credentials (Desktop application)
-5. Add to `.env`:
-```env
-YOUTUBE_CLIENT_ID=your-client-id.apps.googleusercontent.com
-YOUTUBE_CLIENT_SECRET=your-client-secret
-YOUTUBE_REDIRECT_URL=http://localhost:3000/api/auth/youtube/callback
-```
-
-### Instagram/Meta Graph API (For Publishing)
-
-1. Go to https://developers.facebook.com/
-2. Create a new app (type: Consumer)
-3. Add Instagram Basic Display product
-4. Add to `.env`:
-```env
-INSTAGRAM_APP_ID=your-app-id
-INSTAGRAM_APP_SECRET=your-app-secret
-INSTAGRAM_REDIRECT_URL=http://localhost:3000/api/auth/instagram/callback
-```
-
-### ElevenLabs (For Voice-over Generation)
-
-1. Go to https://elevenlabs.io/
-2. Create an account and get API key
-3. Add to `.env`:
-```env
-ELEVEN_LABS_API_KEY=your-api-key
-ELEVEN_LABS_VOICE_ID=default-voice-id
-```
-
-### TrendAPI Integration
-
-1. Sign up at https://trendapi.com/ or use free alternatives
-2. Add to `.env`:
-```env
-TREND_API_KEY=your-api-key
-TREND_API_URL=https://api.trendapi.com
-```
-
-## Development
-
-### Start Development Servers
-
-```bash
-# Run both frontend and backend
-npm run dev
-
-# Or run separately:
-npm run dev:backend
-npm run dev:frontend
-
-# Start background workers
-npm run workers:dev
-```
-
-### Available Scripts
-
-```bash
-npm run dev              # Start all services
-npm run dev:backend      # Backend only
-npm run dev:frontend     # Frontend only
-npm run workers:dev      # Start job workers
-npm run db:setup        # Initialize database
-npm run db:migrate      # Run migrations
-npm run db:seed         # Seed sample data
-npm run test            # Run all tests
-npm run test:unit       # Unit tests
-npm run test:integration # Integration tests
-npm run lint            # Run ESLint
-npm run build           # Build for production
-```
+- **Frontend**: http://localhost:5173
+- **API**: http://localhost:3000/api/v1
+- **API Docs**: http://localhost:3000/api/v1/docs
 
 ## Architecture
 
-### AI Agent System
+### AI Agents
 
-The application uses a modular agent architecture:
+1. **TrendResearchAgent** - Discovers viral trends
+2. **TrendAnalyzerAgent** - Calculates viral potential
+3. **ScriptWriterAgent** - Generates engaging scripts
+4. **VideoPlannerAgent** - Plans video structure
+5. **AssetGeneratorAgent** - Sources/generates assets
+6. **VoiceoverAgent** - Creates audio narration
+7. **VideoEditorAgent** - Assembles final video
+8. **SEOAgent** - Optimizes metadata
+9. **PublishingAgent** - Publishes to platforms
+10. **AnalyticsAgent** - Tracks performance
 
-- **TrendResearchAgent**: Discovers trending topics
-- **TrendAnalyzerAgent**: Analyzes viral potential
-- **ScriptWriterAgent**: Generates video scripts
-- **VideoPlannerAgent**: Plans video structure
-- **AssetGeneratorAgent**: Creates/sources images and media
-- **VoiceoverAgent**: Generates voice-over audio
-- **VideoEditorAgent**: Assembles final video with FFmpeg
-- **SEOAgent**: Optimizes titles, descriptions, hashtags
-- **PublishingAgent**: Handles multi-platform publishing
-- **AnalyticsAgent**: Tracks and analyzes video performance
+### External Services
 
-### Content Pipeline
+- **OpenAI** (GPT-4) - Content generation
+- **ElevenLabs** - Voiceover synthesis
+- **YouTube API** - Video publishing
+- **Instagram Graph API** - Reels publishing
+- **Facebook Graph API** - Video posting
+- **FFmpeg** - Video processing
+
+## Configuration
+
+See [docs/SETUP.md](docs/SETUP.md) for:
+- Getting API keys
+- Database setup
+- Environment configuration
+- Docker deployment
+
+## API Documentation
+
+Complete API reference: [docs/API.md](docs/API.md)
+
+Key endpoints:
+- `POST /auth/register` - Register user
+- `POST /auth/login` - Login
+- `GET /trends` - Get trending topics
+- `POST /scripts/generate` - Generate script
+- `POST /videos/create` - Create video
+- `POST /videos/:id/publish` - Publish video
+- `GET /analytics/dashboard` - Get dashboard stats
+
+## AI Agent Details
+
+Detailed documentation: [docs/AGENTS.md](docs/AGENTS.md)
+
+### Viral Score Calculation
 
 ```
-Trend Discovery → Analysis → Idea Generation → Script Writing → 
-Asset Generation → Voice-over → Video Assembly → SEO Optimization → 
-User Review → Publishing → Analytics
+ViralScore = (Views × 0.4) + (Engagement × 0.4) + (Growth × 0.2)
+
+Score Range: 0-10
+- 0-3: Low viral potential
+- 3-6: Medium viral potential
+- 6-8: High viral potential
+- 8-10: Very high viral potential
 ```
 
-### Technology Stack
+## Database Schema
 
-**Frontend:**
-- React 18
-- Vite
-- Tailwind CSS
-- Zustand (state management)
-- React Query (data fetching)
+See [docs/DATABASE.md](docs/DATABASE.md) and [database/schema.sql](database/schema.sql)
 
-**Backend:**
-- Node.js
-- Express.js
-- PostgreSQL/MongoDB
-- Bull (job queue)
-- JWT authentication
-- Winston (logging)
-
-**Video Processing:**
-- FFmpeg
-- ImageMagick
-
-**External APIs:**
-- OpenAI GPT-4
-- YouTube Data API
-- Instagram Graph API
-- Facebook Graph API
-- ElevenLabs (voice-over)
+Key tables:
+- `users` - User accounts
+- `projects` - Content projects
+- `trends` - Discovered trends
+- `scripts` - Generated scripts
+- `videos` - Created videos
+- `published_videos` - Cross-platform publishing
+- `analytics` - Performance metrics
+- `social_connections` - OAuth tokens
 
 ## Deployment
 
 ### Docker
 
 ```bash
-# Build and run with Docker
 docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
 ```
 
-### Cloud Deployment
+### Heroku
 
-See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for:
-- Heroku deployment
-- AWS deployment
-- DigitalOcean deployment
-- Railway deployment
+```bash
+heroku create your-app-name
+git push heroku main
+heroku run npm run db:migrate
+```
+
+### AWS / Cloud Platforms
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
+
+## Development
+
+### Project Structure
+
+```
+.
+├── frontend/              # React Vite frontend
+├── src/                   # Backend source
+│   ├── server.js         # Express server
+│   ├── routes/           # API routes
+│   ├── middleware/       # Express middleware
+│   └── config/           # Configuration
+├── agents/               # AI agents
+├── services/             # External services
+├── database/             # Database schema
+├── docs/                 # Documentation
+└── tests/                # Test suites
+```
+
+### Testing
+
+```bash
+npm test
+npm run test:watch
+```
+
+### Linting
+
+```bash
+npm run lint
+npm run lint:fix
+npm run format
+```
+
+## Troubleshooting
+
+Common issues and solutions: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+
+## FAQ
+
+Frequently asked questions: [docs/FAQ.md](docs/FAQ.md)
+
+## Examples
+
+Code examples: [docs/EXAMPLES.md](docs/EXAMPLES.md)
+
+## Performance
+
+- Video generation: 30-60 seconds
+- Script writing: 5-10 seconds
+- Publishing: 2-5 seconds
+- Analytics sync: Real-time
+
+### Scaling
+
+- Horizontal scaling: Load balancer + multiple instances
+- Database: PostgreSQL with read replicas
+- Cache: Redis for trends (1-hour TTL)
+- Queue: Bull for async job processing
+
+## Security
+
+- JWT authentication
+- OAuth 2.0 for social platforms
+- Environment variable encryption
+- Rate limiting (100 requests/15 minutes)
+- CORS enabled
+- Helmet security headers
+- SQL injection protection
 
 ## Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md)
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+MIT License - see [LICENSE](LICENSE) file
 
 ## Support
 
-For issues and questions:
-- Open an issue on GitHub
-- Check [FAQ.md](docs/FAQ.md)
-- Read [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+- 📖 [Documentation](docs/)
+- 🐛 [Issue Tracker](https://github.com/yourusername/viral-shorts-ai-agent/issues)
+- 💬 [Discussions](https://github.com/yourusername/viral-shorts-ai-agent/discussions)
+- 📧 [Email Support](mailto:support@example.com)
+
+## Credits
+
+Built with:
+- [OpenAI](https://openai.com) - AI models
+- [ElevenLabs](https://elevenlabs.io) - Voice synthesis
+- [FFmpeg](https://ffmpeg.org) - Video processing
+- [Express.js](https://expressjs.com) - Backend framework
+- [React](https://react.dev) - Frontend framework
+- [PostgreSQL](https://www.postgresql.org) - Database
+
+## Roadmap
+
+- [ ] TikTok publishing support
+- [ ] Multi-language generation
+- [ ] Real-time trend API integration
+- [ ] Advanced A/B testing
+- [ ] Custom AI model training
+- [ ] Mobile app (iOS/Android)
+- [ ] White-label solution
+- [ ] Enterprise API
+
+## Updates
+
+Stay updated:
+- ⭐ Star the repository
+- 👀 Watch for releases
+- 🔔 Subscribe to discussions
 
 ---
 
-**Built with ❤️ using AI-powered development**
+**Made with ❤️ by the Viral Shorts Team**
